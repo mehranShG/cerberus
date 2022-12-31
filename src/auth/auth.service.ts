@@ -12,4 +12,6 @@ export class AuthService {
     @InjectRepository(AuthEntity)
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
+
+  register() {}
 }
