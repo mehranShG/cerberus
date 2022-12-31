@@ -1,4 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+    Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn
+} from 'typeorm'
+import { AuthEntity } from './auth.entity'
 
 @Entity()
 export class UserEntity {
@@ -16,4 +19,8 @@ export class UserEntity {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @OneToOne(() => AuthEntity, (user) => user.id, { eager: true, cascade: true })
+  @JoinColumn()
+  auth: AuthEntity
 }
