@@ -16,7 +16,7 @@ export class AuthService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: RegisterDto): Promise<UserEntity> {
     const user = new UserEntity()
     user.username = registerDto.username
     user.email = registerDto.email
@@ -27,7 +27,7 @@ export class AuthService {
     return result
   }
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<UserEntity> {
     const findUser = await this.userRepository.findOneBy({
       email: loginDto.email,
     })
@@ -45,7 +45,7 @@ export class AuthService {
     return findUser
   }
 
-  async getAll() {
+  async getAll(): Promise<UserEntity[]> {
     return await this.userRepository.find()
   }
 }
