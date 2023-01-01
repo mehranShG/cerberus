@@ -25,6 +25,8 @@ export class AuthService {
     return result
   }
 
+  async login() {}
+
   async getAll() {
     return await this.userRepository.find()
   }
