@@ -24,4 +24,8 @@ export class AuthService {
     const result = await this.userRepository.save(user)
     return result
   }
+
+  async getAll() {
+    return await this.userRepository.find()
+  }
 }
