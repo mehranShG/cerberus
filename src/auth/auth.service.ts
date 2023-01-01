@@ -14,5 +14,14 @@ export class AuthService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
-  register(registerDto: RegisterDto) {}
+  async register(registerDto: RegisterDto) {
+    const user = new UserEntity()
+    user.username = registerDto.username
+    user.email = registerDto.email
+    const auth = new AuthEntity()
+    auth.password = registerDto.password
+    user.auth = auth
+    const result = await this.userRepository.save(user)
+    return result
+  }
 }
