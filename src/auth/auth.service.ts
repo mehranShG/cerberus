@@ -1,3 +1,4 @@
+import { RegisterDto } from 'src/dtos/register.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { UserEntity } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
@@ -13,5 +14,5 @@ export class AuthService {
     private readonly authRepository: Repository<AuthEntity>,
   ) {}
 
-  register() {}
+  register(registerDto: RegisterDto) {}
 }
