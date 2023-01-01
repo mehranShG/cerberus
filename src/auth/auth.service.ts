@@ -1,8 +1,10 @@
+import * as bcrypt from 'bcrypt'
+import { LoginDto } from 'src/dtos/login.dto'
 import { RegisterDto } from 'src/dtos/register.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { UserEntity } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 @Injectable()
@@ -25,7 +27,20 @@ export class AuthService {
     return result
   }
 
-  async login() {}
+  async login(loginDto: LoginDto) {
+    const findUser = await this.userRepository.findOneBy({
+      email: loginDto.email,
+    })
+    if (!findUser) {
+      throw new NotFoundException()
+    }
+    const hashedPassword = findUser.auth.password
+    const comparePassword = bcrypt.compare(hashedPassword, loginDto.password)
+    if (!comparePassword) {
+      throw new UnauthorizedException()
+    }
+    return findUser
+  }
 
   async getAll() {
     return await this.userRepository.find()
