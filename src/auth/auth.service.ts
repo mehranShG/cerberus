@@ -35,7 +35,10 @@ export class AuthService {
       throw new NotFoundException()
     }
     const hashedPassword = findUser.auth.password
-    const comparePassword = bcrypt.compare(hashedPassword, loginDto.password)
+    const comparePassword = await bcrypt.compare(
+      hashedPassword,
+      loginDto.password,
+    )
     if (!comparePassword) {
       throw new UnauthorizedException()
     }
