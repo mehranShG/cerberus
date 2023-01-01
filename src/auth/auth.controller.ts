@@ -13,13 +13,13 @@ export class AuthController {
     return this.authService.register(registerDto)
   }
 
-  @Get()
-  getAllUsers(): Promise<UserEntity[]> {
-    return this.authService.getAll()
-  }
-
   @Post('login')
   login(@Body() loginDto: LoginDto): Promise<UserEntity> {
     return this.authService.login(loginDto)
+  }
+
+  @Get()
+  getAllUsers(): Promise<UserEntity[]> {
+    return this.authService.getAll()
   }
 }
