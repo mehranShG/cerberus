@@ -5,6 +5,7 @@ import { AuthEntity } from 'src/entities/auth.entity'
 import { UserEntity } from 'src/entities/user.entity'
 import { Repository } from 'typeorm'
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
 
 @Injectable()
@@ -14,6 +15,7 @@ export class AuthService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(AuthEntity)
     private readonly authRepository: Repository<AuthEntity>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(registerDto: RegisterDto): Promise<UserEntity> {
@@ -27,7 +29,7 @@ export class AuthService {
     return result
   }
 
-  async login(loginDto: LoginDto): Promise<UserEntity> {
+  async login(loginDto: LoginDto) {
     const findUser = await this.userRepository.findOneBy({
       email: loginDto.email,
     })
@@ -42,7 +44,12 @@ export class AuthService {
     if (!comparePassword) {
       throw new UnauthorizedException()
     }
-    return findUser
+
+    const token = await this.jwtService.signAsync(
+      { id: findUser.id },
+      { expiresIn: '1h' },
+    )
+    return { user: findUser.username, token: token }
   }
 
   async getAll(): Promise<UserEntity[]> {

@@ -18,7 +18,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Login' })
   @Post('login')
-  login(@Body() loginDto: LoginDto): Promise<UserEntity> {
+  login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto)
   }
 
