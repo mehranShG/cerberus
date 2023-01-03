@@ -56,7 +56,7 @@ export class AuthService {
     return await this.userRepository.find()
   }
 
-  async findOne(id: number) {
-    return await this.userRepository.findOneBy({ id: id })
+  async getUserById(id: number) {
+    return await this.userRepository.findOneBy({ id })
   }
 }
