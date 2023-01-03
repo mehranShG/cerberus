@@ -50,6 +50,6 @@ export class AuthService {
   }
 
   async findOne(id: number) {
-    return await this.authRepository.findOneBy({ id: id })
+    return await this.userRepository.findOneBy({ id: id })
   }
 }
