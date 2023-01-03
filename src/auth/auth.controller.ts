@@ -1,8 +1,9 @@
 import { LoginDto } from 'src/dtos/login.dto'
 import { RegisterDto } from 'src/dtos/register.dto'
 import { UserEntity } from 'src/entities/user.entity'
-import { Body, Controller, Get, Post } from '@nestjs/common'
-import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { JwtAuthGuard } from 'src/guards/jwt-guard'
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 
 @ApiTags('Authentication')
@@ -22,6 +23,8 @@ export class AuthController {
     return this.authService.login(loginDto)
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all existing users' })
   @Get()
   getAllUsers(): Promise<UserEntity[]> {
