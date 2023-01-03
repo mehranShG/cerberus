@@ -13,7 +13,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Register new user' })
   @Post('register')
-  register(@Body() registerDto: RegisterDto): Promise<UserEntity> {
+  register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto)
   }
 

@@ -18,7 +18,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(registerDto: RegisterDto): Promise<UserEntity> {
+  async register(registerDto: RegisterDto) {
     const user = new UserEntity()
     user.username = registerDto.username
     user.email = registerDto.email
@@ -26,7 +26,11 @@ export class AuthService {
     auth.password = registerDto.password
     user.auth = auth
     const result = await this.userRepository.save(user)
-    return result
+    const token = await this.jwtService.signAsync(
+      { id: user.id },
+      { expiresIn: '1h' },
+    )
+    return { result: result, token: token }
   }
 
   async login(loginDto: LoginDto) {
