@@ -48,4 +48,8 @@ export class AuthService {
   async getAll(): Promise<UserEntity[]> {
     return await this.userRepository.find()
   }
+
+  async findOne(id: number) {
+    return await this.authRepository.findOneBy({ id: id })
+  }
 }
