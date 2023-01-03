@@ -1,4 +1,5 @@
 import { ExtractJwt, Strategy } from 'passport-jwt'
+import { JwtValidateType } from 'src/types/auth.types'
 import { UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { AuthService } from './auth.service'
@@ -11,10 +12,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: '1234',
     })
   }
-  async validate(payload: any) {
+  async validate(payload: any): Promise<JwtValidateType> {
     const user = await this.authService.findOne(payload.id)
     if (!user) {
-      return new UnauthorizedException()
+      throw new UnauthorizedException()
     }
     return { user_id: user.id, username: user.username }
   }
