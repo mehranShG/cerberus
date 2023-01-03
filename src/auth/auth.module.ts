@@ -10,7 +10,7 @@ import { JwtStrategy } from './jwt.strategy'
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity, AuthEntity]),
-    JwtModule.register({ privateKey: '1234' }),
+    JwtModule.register({ privateKey: process.env.JWT_SECRET }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
