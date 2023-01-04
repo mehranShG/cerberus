@@ -85,7 +85,7 @@ export class AuthService {
    * @param id
    * @returns Promise of an user
    */
-  async getUserById(id: number) {
+  async getUserById(id: number): Promise<UserEntity> {
     return await this.userRepository.findOneBy({ id })
   }
 }
