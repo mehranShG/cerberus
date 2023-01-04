@@ -3,6 +3,7 @@ import { LoginDto } from 'src/dtos/login.dto'
 import { RegisterDto } from 'src/dtos/register.dto'
 import { AuthEntity } from 'src/entities/auth.entity'
 import { UserEntity } from 'src/entities/user.entity'
+import { ResponseModel } from 'src/types/response.model'
 import { Repository } from 'typeorm'
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
@@ -23,19 +24,19 @@ export class AuthService {
    * @param registerDto requires username email and password
    * @returns a Promise of response model
    */
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: RegisterDto): Promise<ResponseModel> {
     const user = new UserEntity()
     user.username = registerDto.username
     user.email = registerDto.email
     const auth = new AuthEntity()
     auth.password = registerDto.password
     user.auth = auth
-    const result = await this.userRepository.save(user)
+    await this.userRepository.save(user)
     const token = await this.jwtService.signAsync(
       { id: user.id },
       { expiresIn: '1h' },
     )
-    return { result: result, token: token }
+    return { success: true, result: token, code: 201 }
   }
 
   /**
