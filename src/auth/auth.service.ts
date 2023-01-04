@@ -44,13 +44,14 @@ export class AuthService {
    * @param loginDto requires email and password
    * @returns a Promise of response model
    */
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<ResponseModel> {
     const findUser = await this.userRepository.findOneBy({
       email: loginDto.email,
     })
     if (!findUser) {
       throw new NotFoundException()
     }
+    // Comparing password with hashed password in database
     const hashedPassword = findUser.auth.password
     const comparePassword = await bcrypt.compare(
       loginDto.password,
@@ -59,12 +60,16 @@ export class AuthService {
     if (!comparePassword) {
       throw new UnauthorizedException()
     }
-
+    // Assigning jwt token to user
     const token = await this.jwtService.signAsync(
       { id: findUser.id },
       { expiresIn: '1h' },
     )
-    return { user: findUser.username, token: token }
+    return {
+      success: true,
+      result: { user: findUser, token: token },
+      code: 201,
+    }
   }
 
   /**

@@ -20,7 +20,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Login' })
   @Post('login')
-  login(@Body() loginDto: LoginDto) {
+  login(@Body() loginDto: LoginDto): Promise<ResponseModel> {
     return this.authService.login(loginDto)
   }
 
