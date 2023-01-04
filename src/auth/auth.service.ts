@@ -18,6 +18,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  /**
+   * Register new user
+   * @param registerDto requires username email and password
+   * @returns a Promise of response model
+   */
   async register(registerDto: RegisterDto) {
     const user = new UserEntity()
     user.username = registerDto.username
@@ -33,6 +38,11 @@ export class AuthService {
     return { result: result, token: token }
   }
 
+  /**
+   * Login
+   * @param loginDto requires email and password
+   * @returns a Promise of response model
+   */
   async login(loginDto: LoginDto) {
     const findUser = await this.userRepository.findOneBy({
       email: loginDto.email,
@@ -56,10 +66,19 @@ export class AuthService {
     return { user: findUser.username, token: token }
   }
 
+  /**
+   * Gets all users in database
+   * @returns Promise of users array
+   */
   async getAll(): Promise<UserEntity[]> {
     return await this.userRepository.find()
   }
 
+  /**
+   * Gets a user by id
+   * @param id
+   * @returns Promise of an user
+   */
   async getUserById(id: number) {
     return await this.userRepository.findOneBy({ id })
   }
