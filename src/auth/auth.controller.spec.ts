@@ -7,6 +7,7 @@ import { AuthService } from './auth.service'
 const mockAuthService = {
   register: jest.fn().mockResolvedValue({}),
   login: jest.fn().mockResolvedValue({}),
+  getAll: jest.fn().mockResolvedValue({}),
 }
 describe('AuthController', () => {
   let controller: AuthController
@@ -38,6 +39,12 @@ describe('AuthController', () => {
     it('should login', async () => {
       const user = new LoginDto()
       expect(await controller.login(user)).toEqual({})
+    })
+  })
+
+  describe('getAllUsers', () => {
+    it('should get all users', async () => {
+      expect(await controller.getAllUsers()).toEqual({})
     })
   })
 })
