@@ -1,10 +1,21 @@
 import { JwtService } from '@nestjs/jwt'
 import { Test, TestingModule } from '@nestjs/testing'
 import { getRepositoryToken } from '@nestjs/typeorm'
+import { LoginDto } from '../dtos/login.dto'
 import { RegisterDto } from '../dtos/register.dto'
 import { AuthEntity } from '../entities/auth.entity'
 import { UserEntity } from '../entities/user.entity'
 import { AuthService } from './auth.service'
+
+const fakeUserRepository = {
+  save: jest.fn().mockResolvedValue({}),
+  findOneBy: jest.fn().mockResolvedValue({
+    id: 1,
+    auth: {
+      password: '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
+    },
+  }),
+}
 
 describe('AuthService', () => {
   let service: AuthService
@@ -19,7 +30,7 @@ describe('AuthService', () => {
         },
         {
           provide: getRepositoryToken(UserEntity),
-          useValue: { save: jest.fn().mockResolvedValue({}) },
+          useValue: fakeUserRepository,
         },
         { provide: getRepositoryToken(AuthEntity), useValue: {} },
       ],
@@ -38,6 +49,27 @@ describe('AuthService', () => {
       expect(await service.register(user)).toEqual({
         code: 201,
         result: 'jwt access token',
+        success: true,
+      })
+    })
+  })
+
+  describe('login', () => {
+    it('should login ', async () => {
+      const user = new LoginDto()
+      user.password = 'testingA'
+      expect(await service.login(user)).toEqual({
+        code: 201,
+        result: {
+          token: 'jwt access token',
+          user: {
+            auth: {
+              password:
+                '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
+            },
+            id: 1,
+          },
+        },
         success: true,
       })
     })
