@@ -81,4 +81,16 @@ describe('AuthService', () => {
       expect(await service.getAll()).toEqual({})
     })
   })
+
+  describe('getUserById', () => {
+    it('should get user by id', async () => {
+      expect(await service.getUserById(1)).toEqual({
+        id: 1,
+        auth: {
+          password:
+            '$2a$10$B7hRu976Yuy1M76Qt2aH7O9nVZRM3PqlaV4t.M9ndAeGn9l3./jzi',
+        },
+      })
+    })
+  })
 })
