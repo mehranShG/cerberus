@@ -9,6 +9,7 @@ import { AuthService } from './auth.service'
 
 const fakeUserRepository = {
   save: jest.fn().mockResolvedValue({}),
+  find: jest.fn().mockResolvedValue({}),
   findOneBy: jest.fn().mockResolvedValue({
     id: 1,
     auth: {
@@ -72,6 +73,12 @@ describe('AuthService', () => {
         },
         success: true,
       })
+    })
+  })
+
+  describe('getAll', () => {
+    it('should get all users', async () => {
+      expect(await service.getAll()).toEqual({})
     })
   })
 })
