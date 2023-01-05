@@ -1,13 +1,13 @@
 import * as bcrypt from 'bcrypt'
-import { LoginDto } from 'src/dtos/login.dto'
-import { RegisterDto } from 'src/dtos/register.dto'
-import { AuthEntity } from 'src/entities/auth.entity'
-import { UserEntity } from 'src/entities/user.entity'
-import { ResponseModel } from 'src/types/response.model'
 import { Repository } from 'typeorm'
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
+import { LoginDto } from '../dtos/login.dto'
+import { RegisterDto } from '../dtos/register.dto'
+import { AuthEntity } from '../entities/auth.entity'
+import { UserEntity } from '../entities/user.entity'
+import { ResponseModel } from '../types/response.model'
 
 @Injectable()
 export class AuthService {
