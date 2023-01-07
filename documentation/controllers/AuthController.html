@@ -130,14 +130,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Get all existing users&#x27;})<br />@Get()<br /></code>
+                    <code>@ApiBearerAuth()<br />@UseGuards(JwtAuthGuard)<br />@ApiOperation({summary: &#x27;Get all existing users&#x27;})<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/auth/auth.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/auth/auth.controller.ts:31</a></div>
                 </td>
             </tr>
 
@@ -180,8 +180,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/auth/auth.controller.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/auth/auth.controller.ts:23</a></div>
                 </td>
             </tr>
 
@@ -219,7 +219,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../classes/ResponseModel.html" target="_self" >Promise&lt;ResponseModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -256,8 +256,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/auth/auth.controller.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/auth/auth.controller.ts:17</a></div>
                 </td>
             </tr>
 
@@ -295,7 +295,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../classes/ResponseModel.html" target="_self" >Promise&lt;ResponseModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -309,11 +309,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { LoginDto } from &#x27;src/dtos/login.dto&#x27;
-import { RegisterDto } from &#x27;src/dtos/register.dto&#x27;
-import { UserEntity } from &#x27;src/entities/user.entity&#x27;
-import { Body, Controller, Get, Post } from &#x27;@nestjs/common&#x27;
-import { ApiOperation, ApiTags } from &#x27;@nestjs/swagger&#x27;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Post, UseGuards } from &#x27;@nestjs/common&#x27;
+import { ApiBearerAuth, ApiOperation, ApiTags } from &#x27;@nestjs/swagger&#x27;
+import { LoginDto } from &#x27;../dtos/login.dto&#x27;
+import { RegisterDto } from &#x27;../dtos/register.dto&#x27;
+import { UserEntity } from &#x27;../entities/user.entity&#x27;
+import { JwtAuthGuard } from &#x27;../guards/jwt-guard&#x27;
+import { ResponseModel } from &#x27;../types/response.model&#x27;
 import { AuthService } from &#x27;./auth.service&#x27;
 
 @ApiTags(&#x27;Authentication&#x27;)
@@ -323,16 +325,18 @@ export class AuthController {
 
   @ApiOperation({ summary: &#x27;Register new user&#x27; })
   @Post(&#x27;register&#x27;)
-  register(@Body() registerDto: RegisterDto): Promise&lt;UserEntity&gt; {
+  register(@Body() registerDto: RegisterDto): Promise&lt;ResponseModel&gt; {
     return this.authService.register(registerDto)
   }
 
   @ApiOperation({ summary: &#x27;Login&#x27; })
   @Post(&#x27;login&#x27;)
-  login(@Body() loginDto: LoginDto): Promise&lt;UserEntity&gt; {
+  login(@Body() loginDto: LoginDto): Promise&lt;ResponseModel&gt; {
     return this.authService.login(loginDto)
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: &#x27;Get all existing users&#x27; })
   @Get()
   getAllUsers(): Promise&lt;UserEntity[]&gt; {

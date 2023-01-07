@@ -84,6 +84,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#getUserById" >getUserById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
@@ -108,12 +112,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userRepository: <a href="../entitys/UserEntity.html" target="_self">Repository&lt;UserEntity&gt;</a>, authRepository: <a href="../entitys/AuthEntity.html" target="_self">Repository&lt;AuthEntity&gt;</a>)</code>
+<code>constructor(userRepository: <a href="../entitys/UserEntity.html" target="_self">Repository&lt;UserEntity&gt;</a>, authRepository: <a href="../entitys/AuthEntity.html" target="_self">Repository&lt;AuthEntity&gt;</a>, jwtService: JwtService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/auth/auth.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/auth/auth.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -147,6 +151,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../entitys/AuthEntity.html" target="_self" >Repository&lt;AuthEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>jwtService</td>
+                                                  
+                                                        <td>
+                                                                    <code>JwtService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -190,17 +206,99 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/auth/auth.service.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="79"
+                            class="link-to-prism">src/auth/auth.service.ts:79</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Gets all users in database</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>Promise of users array</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUserById"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getUserById</b></span>
+                        <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUserById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/auth/auth.service.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets a user by id</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>Promise of an user</p>
 
                     </div>
                 </td>
@@ -229,14 +327,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/auth/auth.service.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/auth/auth.service.ts:47</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Login</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -247,6 +347,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -261,6 +362,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>requires email and password</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -268,11 +373,12 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../classes/ResponseModel.html" target="_self" >Promise&lt;ResponseModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>a Promise of response model</p>
+
                     </div>
                 </td>
             </tr>
@@ -300,14 +406,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/auth/auth.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/auth/auth.service.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Register new user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -318,6 +426,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -332,6 +441,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>requires username email and password</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -339,11 +452,12 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../entitys/UserEntity.html" target="_self" >Promise&lt;UserEntity&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../classes/ResponseModel.html" target="_self" >Promise&lt;ResponseModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>a Promise of response model</p>
+
                     </div>
                 </td>
             </tr>
@@ -356,13 +470,15 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as bcrypt from &#x27;bcrypt&#x27;
-import { LoginDto } from &#x27;src/dtos/login.dto&#x27;
-import { RegisterDto } from &#x27;src/dtos/register.dto&#x27;
-import { AuthEntity } from &#x27;src/entities/auth.entity&#x27;
-import { UserEntity } from &#x27;src/entities/user.entity&#x27;
 import { Repository } from &#x27;typeorm&#x27;
 import { Injectable, NotFoundException, UnauthorizedException } from &#x27;@nestjs/common&#x27;
+import { JwtService } from &#x27;@nestjs/jwt&#x27;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;
+import { LoginDto } from &#x27;../dtos/login.dto&#x27;
+import { RegisterDto } from &#x27;../dtos/register.dto&#x27;
+import { AuthEntity } from &#x27;../entities/auth.entity&#x27;
+import { UserEntity } from &#x27;../entities/user.entity&#x27;
+import { ResponseModel } from &#x27;../types/response.model&#x27;
 
 @Injectable()
 export class AuthService {
@@ -371,26 +487,42 @@ export class AuthService {
     private readonly userRepository: Repository&lt;UserEntity&gt;,
     @InjectRepository(AuthEntity)
     private readonly authRepository: Repository&lt;AuthEntity&gt;,
+    private readonly jwtService: JwtService,
   ) {}
 
-  async register(registerDto: RegisterDto): Promise&lt;UserEntity&gt; {
+  /**
+   * Register new user
+   * @param registerDto requires username email and password
+   * @returns a Promise of response model
+   */
+  async register(registerDto: RegisterDto): Promise&lt;ResponseModel&gt; {
     const user &#x3D; new UserEntity()
     user.username &#x3D; registerDto.username
     user.email &#x3D; registerDto.email
     const auth &#x3D; new AuthEntity()
     auth.password &#x3D; registerDto.password
     user.auth &#x3D; auth
-    const result &#x3D; await this.userRepository.save(user)
-    return result
+    await this.userRepository.save(user)
+    const token &#x3D; await this.jwtService.signAsync(
+      { id: user.id },
+      { expiresIn: &#x27;1h&#x27; },
+    )
+    return { success: true, result: token, code: 201 }
   }
 
-  async login(loginDto: LoginDto): Promise&lt;UserEntity&gt; {
+  /**
+   * Login
+   * @param loginDto requires email and password
+   * @returns a Promise of response model
+   */
+  async login(loginDto: LoginDto): Promise&lt;ResponseModel&gt; {
     const findUser &#x3D; await this.userRepository.findOneBy({
       email: loginDto.email,
     })
     if (!findUser) {
       throw new NotFoundException()
     }
+    // Comparing password with hashed password in database
     const hashedPassword &#x3D; findUser.auth.password
     const comparePassword &#x3D; await bcrypt.compare(
       loginDto.password,
@@ -399,11 +531,33 @@ export class AuthService {
     if (!comparePassword) {
       throw new UnauthorizedException()
     }
-    return findUser
+    // Assigning jwt token to user
+    const token &#x3D; await this.jwtService.signAsync(
+      { id: findUser.id },
+      { expiresIn: &#x27;1h&#x27; },
+    )
+    return {
+      success: true,
+      result: { user: findUser, token: token },
+      code: 201,
+    }
   }
 
+  /**
+   * Gets all users in database
+   * @returns Promise of users array
+   */
   async getAll(): Promise&lt;UserEntity[]&gt; {
     return await this.userRepository.find()
+  }
+
+  /**
+   * Gets a user by id
+   * @param id
+   * @returns Promise of an user
+   */
+  async getUserById(id: number): Promise&lt;UserEntity&gt; {
+    return await this.userRepository.findOneBy({ id })
   }
 }
 </code></pre>
