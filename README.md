@@ -34,6 +34,15 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Running documentation
+
+```bash
+# Generating
+$ npx @compodoc/compodoc -p tsconfig.json -s
+# Running
+$ npx compodoc -s
+```
+
 ## Contact Me
 
 - Author - Mehran Shahbaz
